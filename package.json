@@ -7,7 +7,7 @@
     "test": "gulp test",
     "build": "gulp build",
     "build-production": "gulp build --production",
-    "start": "node processes/web",
+    "start": "node server/processes/web",
     "code-style": "gulp code-style"
   },
   "repository": {
