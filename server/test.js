@@ -4,6 +4,7 @@ require('dotenv').config({ silet: true });
 const co = require('co');
 
 co(function *() {
+  console.log('test');
 }).then(() => {
   console.log('ok');
 
