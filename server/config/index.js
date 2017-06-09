@@ -22,7 +22,7 @@ const getPath = function(env) {
     };
   }
   return {
-    migrations_path: 'migrations',
+    migrations_path: 'server/migrations',
     config_path: 'server/config/database.json'
   };
 };
