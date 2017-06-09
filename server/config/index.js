@@ -23,7 +23,7 @@ const getPath = function(env) {
   }
   return {
     migrations_path: 'migrations',
-    config_path: 'config/database.json'
+    config_path: 'server/config/database.json'
   };
 };
 
