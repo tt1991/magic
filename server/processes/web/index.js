@@ -7,7 +7,7 @@ const BoarServer = require('boar-server').app;
 const ssl = require('koa-ssl');
 const apiResponseHandler = require('../../lib/api-response-handler');
 
-// const database = require('../../lib/database');
+require('shelljs/global');
 
 const createApp = function() {
   const app = new koa();
