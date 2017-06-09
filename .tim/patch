@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function print()
+{
+    echo -e "---> $(tput setaf 2)$1$(tput sgr0)"
+}
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ -z "$1" ]
+then
+    print "Running migrations on the Developer Database"
+    env $(cat $DIR/../.env | xargs) $DIR/../node_modules/.bin/sequelize db:migrate --config=server/config/database.json --migrations-path=server/migrations
+fi
+
+if [[ $1 == create ]]
+then
+    print "Creating a new migration file"
+    env $(cat $DIR/../.env | xargs) $DIR/../node_modules/.bin/sequelize migration:create --config=server/config/database.json --migrations-path=server/migrations
+fi
+
+if [[ $1 == undo ]]
+then
+    print "Reverting the latest migration on the Developer Database"
+    env $(cat $DIR/../.env | xargs) $DIR/../node_modules/.bin/sequelize db:migrate:undo --config=server/config/database.json --migrations-path=server/migrations
+fi

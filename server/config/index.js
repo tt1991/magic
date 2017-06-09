@@ -14,6 +14,19 @@ const getDbConfig = function(nodeEnv) {
   return process.env.DATABASE_URL;
 };
 
+const getPath = function(env) {
+  if (env === 'development') {
+    return {
+      migrations_path: 'dist/migrations',
+      config_path: 'dist/config/database.json'
+    };
+  }
+  return {
+    migrations_path: 'migrations',
+    config_path: 'config/database.json'
+  };
+};
+
 const config = {
   root: path.normalize(__dirname + '/../processes/web'),
   env: process.env.NODE_ENV,
@@ -25,6 +38,8 @@ const config = {
   noSslEnforce: process.env.NO_SSL_ENFORCE === 'true',
 
   databaseUrl: getDbConfig(process.env.NODE_ENV),
+
+  sequelize: getPath(process.env.NODE_ENV),
 
   amqp: {
     default: {

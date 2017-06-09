@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function print()
+{
+    echo -e "---> $(tput setaf 2)$1$(tput sgr0)"
+}
+
+function print_red()
+{
+    echo -e "---> $(tput setaf 1)[WARNING] $1$(tput sgr0)"
+}
+
+if [ -z "$1" ]
+then
+    print "Connecting to Developer Database"
+    if command -v psql >/dev/null 2>&1
+    then
+        psql -p5432
+    fi
+else
+    if [[ $1 == p* ]]
+    then
+        print_red "Connecting to Production Database"
+        heroku pg:psql -a ems-push-notification
+    fi
+    if [[ $1 == s* ]]
+    then
+        print "Connecting to Staging Database"
+        heroku pg:psql -a ems-push-notification-staging
+    fi
+    if [[ $1 == v* ]]
+    then
+        print "Connecting to Vagrant Database"
+        PGPASSWORD=secret psql -h 192.168.40.10 -U cubebloc cubebloc
+    fi
+fi

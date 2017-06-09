@@ -2,11 +2,24 @@
 
 const sinon = require('sinon');
 const chai = require('chai');
-const sinonChai = require('sinon-chai');
 const chaiSubset = require('chai-subset');
 const chaiString = require('chai-string');
+const sinonChai = require('sinon-chai');
 const helpers = require('./spec-helpers');
-let Logger = require('logentries-logformat').Logger;
+
+require('shelljs/global');
+
+before(function() {
+  let command = 'node_modules/.bin/sequelize db:migrate ' +
+    '--migrations-path=server/migrations --config=server/config/database.json';
+
+  this.timeout(15000);
+
+  // eslint-disable-next-line no-undef
+  if (exec(command).code !== 0) {
+    process.exit(1);
+  }
+});
 
 chai.use(chaiSubset);
 chai.use(sinonChai);
@@ -20,12 +33,11 @@ beforeEach(async function() {
   await this.helpers.cleanUpDb();
 
   this.sandbox = sinon.sandbox.create();
-  this.sandbox.stub(Logger.prototype, 'log');
-  this.sandbox.stub(Logger.prototype, 'success');
-  this.sandbox.stub(Logger.prototype, 'error');
 });
 
 afterEach(async function() {
-  this.sandbox.restore();
   await this.helpers.cleanUpDb();
+  this.helpers = undefined;
+  this.sandbox.restore();
+  this.sandbox = undefined;
 });
