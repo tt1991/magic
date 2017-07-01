@@ -3,13 +3,14 @@
 const request = require('supertest');
 const app = require('../../../index');
 
-describe('Health check', function() {
+describe('Videos', function() {
   it('should respond with success', async function() {
     const response = await request(app.listen())
-      .get('/healthcheck')
+      .post('/api/videos')
+      .send({ name: 'test' })
       .expect('Content-Type', /json/)
       .expect(200);
 
-    expect(response.body).to.eql({ success: true });
+    expect(response.body).to.eql({ message: 'OK' });
   });
 });

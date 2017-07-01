@@ -31,6 +31,6 @@ else
     if [[ $1 == v* ]]
     then
         print "Connecting to Vagrant Database"
-        PGPASSWORD=secret psql -h 192.168.40.10 -U cubebloc cubebloc
+        PGPASSWORD=secret psql -h 192.168.40.10 -U cubebloc magic
     fi
 fi

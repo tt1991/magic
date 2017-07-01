@@ -1,18 +1,17 @@
 'use strict';
 
-const config = require('../../../../../config');
-const { PgDatabase } = require('@emartech/me-psql-query-builder');
-const logger = require('logentries-logformat')('me-data-healthcheck');
+const Sequelize = require('sequelize');
+const env = process.env.NODE_ENV || 'development';
+const config = require('../../../../../config/database.json')[env];
 
 module.exports = async function() {
-  const pgsqlResult = await PgDatabase.create(config.databaseUrl).one('SELECT 1 as value');
-  const isPgsqlUp = pgsqlResult.value === 1;
+  const sequelize = config.use_env_variable ?
+    new Sequelize(process.env[config.use_env_variable], config) :
+    new Sequelize(config.database, config.username, config.password, config);
 
-  const success = isPgsqlUp;
+  const result = await sequelize.query('SELECT true as result', { type: sequelize.QueryTypes.SELECT });
 
-  if (!isPgsqlUp) {
-    logger.error('connection error', 'PGSQL is not available!');
-  }
+  const success = result[0].result;
 
   this.sendApiResponse(success ? 200 : 500, '', { success });
 

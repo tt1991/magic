@@ -2,22 +2,24 @@
 
 const koa = require('koa');
 const path = require('path');
+const app = new koa();
 const config = require('../../config');
 const BoarServer = require('boar-server').app;
+const server = new BoarServer(app);
 const ssl = require('koa-ssl');
 const apiResponseHandler = require('../../lib/api-response-handler');
 
 require('shelljs/global');
 
-const createApp = function() {
-  const app = new koa();
-  const server = new BoarServer(app);
-  apiResponseHandler.addHandler(app);
-  server.addMiddleware(ssl({ disabled: config.noSslEnforce, trustProxy: config.proxy }));
-  server.addBodyParseMiddleware();
-  server.loadControllers(path.join(config.root, 'controllers'));
-  return app;
-};
+app.use(ssl({ trustProxy: true }));
+
+apiResponseHandler.addHandler(app);
+
+server.addBodyParseMiddleware();
+server.addCorsSupportMiddleware();
+server.loadControllers(path.join(config.root, 'controllers'));
+server.addStaticContentMiddleware(path.join(config.root, '../..', 'static'));
+
 
 if (!module.parent) {
   if (config.env !== 'development') {
@@ -34,8 +36,8 @@ if (!module.parent) {
     }
   }
 
-  createApp().listen(config.port);
+  app.listen(config.port);
   console.log(`Server is listening on port: ${config.port}`);
 }
 
-module.exports = createApp;
+module.exports = app;

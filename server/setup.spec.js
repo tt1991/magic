@@ -21,8 +21,8 @@ before(function() {
   }
 });
 
-chai.use(chaiSubset);
 chai.use(sinonChai);
+chai.use(chaiSubset);
 chai.use(chaiString);
 global.expect = chai.expect;
 
