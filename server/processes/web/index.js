@@ -12,7 +12,7 @@ require('shelljs/global');
 const createApp = function() {
   const app = new koa();
   const server = new BoarServer(app);
-  // app.use(ssl({ trustProxy: true }));
+  app.use(ssl({ trustProxy: true }));
   server.addMiddleware(ssl({ disabled: config.noSslEnforce, trustProxy: config.proxy }));
   server.addBodyParseMiddleware();
   server.loadControllers(path.join(config.root, 'controllers'));
