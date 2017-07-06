@@ -20,6 +20,10 @@ class VideosHandler {
   }
 
   async _checkForNewMoves(moves) {
+    if (!moves || moves.length === 0) {
+      return false;
+    }
+
     let hasNewMove = false;
     const moveNames = await movesRepository.getMoves();
 

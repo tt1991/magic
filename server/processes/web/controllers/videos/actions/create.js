@@ -10,13 +10,6 @@ const validateRequest = function(data) {
 };
 
 module.exports = {
-  // eslint-disable-next-line
-  scheme: request => {
-    return [
-      { key: 'name', as: 'name', type: 'string', optional: false }
-    ];
-  },
-
   action: async function() {
     const requestData = this.request.body;
     let hasNewMove = false;
