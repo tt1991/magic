@@ -21,7 +21,7 @@
     "@emartech/me-psql-query-builder": "1.0.0",
     "amqplib": "0.5.1",
     "basic-auth": "1.1.0",
-    "boar-server": "5.0.2",
+    "boar-server": "5.2.2",
     "co": "4.6.0",
     "co-functional": "0.2.1",
     "dotenv": "4.0.0",
