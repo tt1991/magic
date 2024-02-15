@@ -19,7 +19,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@emartech/me-psql-query-builder": "1.0.0",
-    "amqplib": "0.5.1",
+    "amqplib": "0.10.3",
     "basic-auth": "1.1.0",
     "boar-server": "5.0.2",
     "co": "4.6.0",
