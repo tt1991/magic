@@ -45,7 +45,7 @@
     "node": "8.1.4"
   },
   "devDependencies": {
-    "boar-tasks-server": "9.0.1",
+    "boar-tasks-server": "9.3.0",
     "chai": "4.0.1",
     "chai-string": "1.3.0",
     "chai-subset": "1.5.0",
