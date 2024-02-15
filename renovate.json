@@ -2,5 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true,
+      "automergeSchedule": ["at any time"],
+      "npmToken": "process.env.NPM_TOKEN"
+    }
   ]
 }
