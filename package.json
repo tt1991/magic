@@ -33,7 +33,7 @@
     "pg-escape": "0.2.0",
     "pg-promise": "5.8.1",
     "request": "2.81.0",
-    "request-promise": "4.2.1",
+    "request-promise": "4.2.6",
     "say": "0.11.0",
     "sequelize": "6.29.0",
     "sequelize-cli": "2.7.0",
