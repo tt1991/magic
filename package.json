@@ -49,7 +49,7 @@
     "chai": "4.0.1",
     "chai-string": "1.3.0",
     "chai-subset": "1.5.0",
-    "eslint-config-emarsys": "4.0.0",
+    "eslint-config-emarsys": "5.1.0",
     "eslint-plugin-mocha": "4.9.0",
     "eslint-plugin-no-only-tests": "1.1.0",
     "eslint-plugin-security": "1.3.0",
